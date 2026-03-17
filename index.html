@@ -1,704 +1,744 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Network, 
-  Activity, 
-  Lightbulb, 
-  Target, 
-  ChevronRight, 
-  Menu, 
-  X, 
-  BookOpen, 
-  Users,
-  TrainFront,
-  Compass,
-  Zap,
-  User,
-  Building2,
-  ArrowDownCircle,
-  RefreshCw,
-  Share2
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究ポートフォリオ | 規模に依存しない社会集団安定化メソッドの開発</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-const App = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // スクロール位置を監視してナビゲーションのアクティブ状態を更新
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['overview', 'findings', 'conclusion'];
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const top = element.offsetTop;
-          const bottom = top + element.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < bottom) {
-            setActiveTab(section);
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleNavClick = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      // スムーズスクロールを実行（ヘッダーの高さを考慮して少し上にずらす）
-      const y = element.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
-
-  const navLinks = [
-    { id: 'overview', name: '研究概要', icon: BookOpen },
-    { id: 'findings', name: '調査結果', icon: Network },
-    { id: 'conclusion', name: '考察と展望', icon: Compass },
-  ];
-
-  // ==========================================
-  // 1. 研究概要セクション
-  // ==========================================
-  const OverviewSection = () => (
-    <div id="overview" className="pt-8 pb-20 space-y-24">
-      {/* ヒーローヘッダー */}
-      <div className="text-center md:text-left animate-fade-in">
-        <span className="inline-block py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-blue-200 text-sm font-semibold tracking-wider mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-          RESEARCH PORTFOLIO 2025-2026
-        </span>
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-8 text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200 drop-shadow-sm">
-          規模に依存しない<br />社会集団安定化メソッドの開発
-        </h1>
-        <p className="text-xl md:text-2xl text-blue-100 mb-12 font-light leading-relaxed max-w-3xl">
-          いかにして崩壊に対する耐性が高く、持続可能な集団を形成しうるか。
-        </p>
-        
-        <div className="flex flex-col sm:flex-row items-center gap-6 text-base font-medium text-blue-200 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md inline-flex shadow-lg">
-          <div className="flex items-center gap-3">
-            <Users size={20} className="text-blue-400" />
-            <span>横浜創英中学/高等学校 サイエンスコース 第1期生</span>
-          </div>
-          <div className="hidden sm:block text-blue-400/50">|</div>
-          <div className="flex items-center gap-3">
-            <span className="text-white text-xl font-bold tracking-wide">奈良橋 篤生</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"></div>
-
-      {/* 探究概要 */}
-      <div className="space-y-12">
-        <div className="flex items-center gap-4">
-          <div className="p-3 bg-blue-500/20 rounded-xl border border-blue-400/30 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-            <BookOpen className="text-blue-300" size={28} />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-white">探究概要</h2>
-            <p className="text-blue-200 mt-1">多視点からのアプローチ</p>
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-12 gap-10">
-          <div className="md:col-span-6 space-y-6 text-lg text-blue-50/90 leading-relaxed font-light">
-            <p className="text-xl text-white font-medium border-l-4 border-blue-400 pl-4 py-1 bg-gradient-to-r from-blue-500/10 to-transparent">
-              人間の社会生活において、集団への所属は生存および適応の必須条件である。
-            </p>
-            <p>
-              家族や地域コミュニティなどの第一次集団、あるいは学校や企業等の第二次集団をはじめ、個人は常に重層的な集団構造のなかに位置づけられています。一般的に、これらの所属集団は単なる生活の場にとどまらず、個人の社会的アイデンティティを形成し、自己の心理的安定をもたらす重要な基盤として機能しています。
-            </p>
-            <p>
-              しかしながら、社会集団や所属組織が機能不全に陥り、崩壊や解散に至る事例は枚挙に暇がありません。身近な集団の維持および崩壊は、個人の生活充実性に直結する看過できない課題です。
-            </p>
-            <p>
-              本研究では、対人関係理論などの小規模に限定される解決策ではなく、<strong className="text-white font-bold bg-blue-500/20 px-2 py-0.5 rounded">グループ・ダイナミックス等の大規模な集団に対応しうる手段</strong>を基盤として、安定化メソッドの開拓を進めています。
-            </p>
-          </div>
-          
-          <div className="md:col-span-6 space-y-6">
-            {/* 図解 1: 重層的な集団構造 */}
-            <div className="bg-black/30 border border-white/10 p-8 rounded-3xl backdrop-blur-md relative overflow-hidden flex flex-col items-center justify-center min-h-[300px]">
-              <h3 className="absolute top-6 left-6 text-white/80 font-bold text-sm tracking-widest uppercase">図解: 重層的な社会集団構造</h3>
-              
-              <div className="relative flex items-center justify-center w-full h-48 mt-8">
-                {/* 第二次集団 */}
-                <div className="absolute w-48 h-48 rounded-full border border-blue-400/30 bg-blue-900/10 flex items-start justify-center pt-2">
-                  <span className="text-xs text-blue-300 font-medium flex items-center gap-1"><Building2 size={12}/> 第二次集団 (学校・企業)</span>
-                </div>
-                {/* 第一次集団 */}
-                <div className="absolute w-32 h-32 rounded-full border border-emerald-400/40 bg-emerald-900/20 flex items-start justify-center pt-2 shadow-[0_0_30px_rgba(16,185,129,0.1)] z-10">
-                  <span className="text-xs text-emerald-300 font-medium flex items-center gap-1"><Users size={12}/> 第一次集団 (家族・地域)</span>
-                </div>
-                {/* 個人 */}
-                <div className="absolute w-16 h-16 rounded-full border border-white/50 bg-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)] z-20 backdrop-blur-md">
-                  <User className="text-white" size={24}/>
-                </div>
-              </div>
-              <p className="text-sm text-center text-white/60 mt-6 max-w-xs">
-                個人は常に複数のコミュニティに内包され、その崩壊は個人の心理的安全性に直結する。
-              </p>
-            </div>
-
-            {/* リスクのリスト */}
-            <div className="bg-red-500/10 border border-red-500/30 p-6 rounded-3xl backdrop-blur-md relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/20 blur-[50px] rounded-full"></div>
-              <h3 className="text-red-300 font-bold text-lg mb-4 flex items-center gap-2 relative z-10">
-                <Activity size={20} /> 集団崩壊のリスク連鎖
-              </h3>
-              <ul className="space-y-3 text-red-100/90 text-sm relative z-10 font-light">
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
-                  <span>機能不全によるコミュニティの解散</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
-                  <span>集団凝集性の低下と心理的安全性の喪失</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
-                  <span className="font-medium text-white">個人の帰属意識低下に伴う心身への重大なストレス</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 今期の研究 */}
-      <div className="pt-8">
-        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-          <Zap className="text-yellow-400" size={24} /> 今期の研究プロセス
-        </h3>
-        <p className="text-lg text-blue-50/90 mb-8 font-light leading-relaxed">
-          本年度は、主幹テーマである「集団増強メソッドの構築」に向けた多角的な実証データの蓄積を目的とし、前年度よりも研究対象の細分化を図りました。
-        </p>
-
-        {/* プロセス図解 */}
-        <div className="relative">
-          {/* 繋ぎの線 */}
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-500/20 via-white/20 to-purple-500/20 -translate-y-1/2 rounded-full"></div>
-          
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
-            {/* 前期 */}
-            <div className="bg-[#111827]/80 border border-blue-500/30 p-8 rounded-3xl backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(59,130,246,0.2)]">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center text-xl font-bold border border-blue-400/50 shadow-inner">
-                  前
-                </div>
-                <h4 className="text-xl font-bold text-white">仮説生成と予測的実験</h4>
-              </div>
-              <ul className="space-y-4 text-blue-100/80 font-light text-base">
-                <li className="flex gap-3 items-start"><ChevronRight size={18} className="text-blue-400 flex-shrink-0 mt-1" /> <span>日常的な社会生活や教育環境から要因を抽出</span></li>
-                <li className="flex gap-3 items-start"><ChevronRight size={18} className="text-blue-400 flex-shrink-0 mt-1" /> <span>計算機シミュレーションによる継続的な実験</span></li>
-                <li className="flex gap-3 items-start"><ChevronRight size={18} className="text-blue-400 flex-shrink-0 mt-1" /> <span>数理モデル化を通じた仮説の検証</span></li>
-              </ul>
-            </div>
-
-            {/* 後期 */}
-            <div className="bg-[#111827]/80 border border-purple-500/30 p-8 rounded-3xl backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(168,85,247,0.2)]">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 text-purple-300 flex items-center justify-center text-xl font-bold border border-purple-400/50 shadow-inner">
-                  後
-                </div>
-                <h4 className="text-xl font-bold text-white">データ統合と理論の一般化</h4>
-              </div>
-              <ul className="space-y-4 text-purple-100/80 font-light text-base">
-                <li className="flex gap-3 items-start"><ChevronRight size={18} className="text-purple-400 flex-shrink-0 mt-1" /> <span>縦断的調査データの統合と分析</span></li>
-                <li className="flex gap-3 items-start"><ChevronRight size={18} className="text-purple-400 flex-shrink-0 mt-1" /> <span>前年度の課題列挙と研究計画の修正</span></li>
-                <li className="flex gap-3 items-start"><ChevronRight size={18} className="text-purple-400 flex-shrink-0 mt-1" /> <span>外部への情報発信と発表力の強化</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // ==========================================
-  // 2. 調査結果セクション
-  // ==========================================
-  const FindingsSection = () => (
-    <div id="findings" className="pt-20 pb-20 space-y-16 border-t border-white/10">
-      <div className="flex items-center gap-4 mb-8">
-        <div className="p-3 bg-emerald-500/20 rounded-xl border border-emerald-400/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-          <Network className="text-emerald-300" size={28} />
-        </div>
-        <div>
-          <h2 className="text-3xl font-bold text-white">調査結果と分析</h2>
-          <p className="text-emerald-200 mt-1">マルチエージェント・シミュレーション環境を用いた大規模検証</p>
-        </div>
-      </div>
-
-      {/* Case 1: Micelle */}
-      <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
-        <div className="mb-6 inline-block px-4 py-1.5 bg-emerald-500/20 border border-emerald-500/30 rounded-full text-emerald-300 text-sm font-bold tracking-widest shadow-lg">
-          前期調査
-        </div>
-        <h3 className="text-2xl md:text-4xl font-bold text-white mb-10">複数集団に対するミセル的統合法の有効性</h3>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
-          <div className="space-y-6 text-blue-50/90 text-lg font-light leading-relaxed">
-            <p>
-              複数集団の統合および分化のダイナミクスに着目し、物理化学における界面活性剤の乳化作用（ミセル形成）を社会的ネットワーク構造に援用しました。
-            </p>
-            <div className="p-6 bg-black/30 border-l-4 border-emerald-400 rounded-r-2xl backdrop-blur-md shadow-inner">
-              <strong className="text-white text-xl block mb-2">検証仮説</strong>
-              「複数の集団に所属する個人が異質集団間の結節点となり、コミュニティの統合を促進する」
-              <br/><span className="text-sm text-emerald-300 mt-2 block">※仮想空間上に1,000個体のエージェントを配置して検証</span>
-            </div>
-            <div className="mt-6 space-y-3">
-              <h4 className="font-bold text-emerald-300 text-xl flex items-center gap-2">
-                <Target size={20}/> シミュレーション結果
-              </h4>
-              <p>
-                統制群では機能不全に伴う内部分裂が発生したのに対し、集団間を媒介する<strong className="text-white font-bold bg-emerald-500/20 px-2 rounded">「ミセル役」を10個体投入した実験群では、コミュニティの流動性が向上</strong>し、分裂発生率が大幅に減少しました。
-              </p>
-            </div>
-          </div>
-          
-          {/* 図解 2: ミセル的統合法 (ディテール強化) */}
-          <div className="bg-black/40 rounded-3xl p-8 flex flex-col items-center justify-center min-h-[350px] border border-white/10 relative overflow-hidden backdrop-blur-xl shadow-2xl">
-            <h4 className="absolute top-6 left-6 text-white/60 font-bold text-sm tracking-widest uppercase z-30">図解: ミセル役による集団の媒介</h4>
-            
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 mix-blend-overlay"></div>
-            
-            <div className="w-full relative z-20 mt-8">
-              <div className="flex justify-center items-center gap-8 md:gap-16 relative">
-                
-                {/* 背景のネットワークの線（エージェント間の繋がりを示唆） */}
-                <svg className="absolute inset-0 w-full h-full" style={{zIndex: -1}}>
-                   <line x1="20%" y1="50%" x2="50%" y2="50%" stroke="rgba(52,211,153,0.3)" strokeWidth="2" strokeDasharray="5,5" />
-                   <line x1="80%" y1="50%" x2="50%" y2="50%" stroke="rgba(52,211,153,0.3)" strokeWidth="2" strokeDasharray="5,5" />
-                </svg>
-
-                {/* 集団 A */}
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-blue-500/20 blur-xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="w-28 h-28 rounded-full bg-[#1e293b] border-2 border-blue-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.3)] relative z-10">
-                    <span className="font-bold text-blue-100 text-lg">集団 A</span>
-                    <div className="flex gap-1 mt-2">
-                      <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                      <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                      <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ミセル役 */}
-                <div className="relative z-30 transform hover:scale-110 transition-transform cursor-pointer">
-                  <div className="absolute -inset-3 bg-emerald-400/30 blur-lg rounded-full animate-pulse"></div>
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex flex-col items-center justify-center shadow-[0_0_25px_rgba(52,211,153,0.6)] border-2 border-white ring-4 ring-black/50">
-                    <Share2 size={24} className="mb-1" />
-                    <span className="font-bold text-xs">ミセル役</span>
-                  </div>
-                </div>
-
-                {/* 集団 B */}
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-purple-500/20 blur-xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="w-28 h-28 rounded-full bg-[#1e293b] border-2 border-purple-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(168,85,247,0.3)] relative z-10">
-                    <span className="font-bold text-purple-100 text-lg">集団 B</span>
-                    <div className="flex gap-1 mt-2">
-                      <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                      <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                      <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-12 text-center">
-                <p className="text-sm text-emerald-100/90 bg-black/60 px-6 py-3 rounded-xl inline-block backdrop-blur-md border border-white/10 shadow-lg">
-                  内部・外部で異なる性質（極）を引き付け、<br/>異質集団間の結節点として機能する
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Case 2: Entropy & Traffic */}
-      <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-        <div className="mb-6 inline-block px-4 py-1.5 bg-amber-500/20 border border-amber-500/30 rounded-full text-amber-300 text-sm font-bold tracking-widest shadow-lg">
-          後期調査（中核検証）
-        </div>
-        <h3 className="text-2xl md:text-4xl font-bold text-white mb-10">交通網の発達に伴う「社会的エンタルピー」の増大とコミュニティの変容</h3>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div className="space-y-6 text-blue-50/90 text-lg font-light leading-relaxed">
-            <p>
-              検証にあたり、仮想空間上に<strong className="text-white font-medium text-xl bg-amber-500/20 px-2 rounded">10,000個体</strong>のエージェントと複数のコミュニティ・クラスターをランダムに配置した大規模シミュレーションを構築しました。
-            </p>
-            <p>
-              エージェント間の移動速度を任意に操作可能な交通モデルを導入し、移動速度の変化に伴う人員の流動とコミュニティ構造の遷移過程を観測しました。
-            </p>
-            
-            <div className="bg-black/30 p-6 md:p-8 rounded-2xl border border-white/10 backdrop-blur-md shadow-inner">
-              <h4 className="font-bold text-amber-300 mb-4 flex items-center gap-2 text-xl">
-                <Lightbulb size={24} /> 分析結果と示唆
-              </h4>
-              <p className="mb-4">
-                シミュレーションの結果、コミュニティの安定性を担保する絶対的かつ静的な最適値は見出されませんでした。
-              </p>
-              <div className="border-l-4 border-amber-400 pl-5 py-2 bg-gradient-to-r from-amber-500/10 to-transparent">
-                <p className="text-white font-medium">
-                  コミュニティ構造の変容は、<strong className="font-bold text-amber-200 text-xl">移動速度の絶対値ではなく、初期状態からの相対的な変化率に強く依存</strong>することが明らかとなりました。
-                </p>
-              </div>
-            </div>
-
-            <p className="pt-2">
-              交通インフラや情報通信網の急激な発達は、社会システム内の<strong className="text-white font-bold border-b border-amber-400">社会的エンタルピー（無秩序さ・流動性）</strong>を急増させ、コミュニティの急激な再編や機能不全を引き起こすリスクを伴うことが示唆されました。
-            </p>
-          </div>
-
-          <div className="flex flex-col h-full">
-            {/* 交通比較グラフィック (インフォグラフィック強化) */}
-            <div className="bg-[#111827]/90 rounded-3xl p-8 md:p-10 border border-white/10 relative overflow-hidden h-full flex flex-col justify-center shadow-2xl">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 blur-[80px] rounded-full pointer-events-none"></div>
-              
-              <h4 className="absolute top-6 left-6 text-white/60 font-bold text-sm tracking-widest uppercase">図解: モビリティの進化と影響</h4>
-
-              <div className="text-center mt-6 mb-12">
-                <h5 className="font-bold text-2xl text-white tracking-wide mb-2">
-                  200年間での移動時間の変化
-                </h5>
-                <span className="inline-block px-3 py-1 bg-white/10 rounded-full text-sm text-white/80">東京・小田原間 のケース</span>
-              </div>
-              
-              <div className="space-y-12 relative z-10 w-full max-w-md mx-auto">
-                {/* 1826年 */}
-                <div className="relative group">
-                  <div className="flex justify-between items-end mb-3">
-                    <div className="flex items-center gap-2">
-                      <User size={20} className="text-amber-200/70" />
-                      <span className="font-medium text-amber-100/90 text-lg">1826年 (徒歩)</span>
-                    </div>
-                    <span className="font-mono text-amber-300 font-bold text-xl">約 48 時間</span>
-                  </div>
-                  <div className="w-full bg-white/5 border border-white/10 rounded-full h-6 backdrop-blur-sm overflow-hidden p-1 shadow-inner">
-                    {/* バーは100%の長さ */}
-                    <div className="bg-amber-500/40 h-full rounded-full w-full relative"></div>
-                  </div>
-                </div>
-                
-                {/* 2026年 */}
-                <div className="relative group">
-                  <div className="flex justify-between items-end mb-3">
-                    <div className="flex items-center gap-2">
-                      <TrainFront size={20} className="text-cyan-300" />
-                      <span className="font-medium text-cyan-100/90 text-lg">2026年 (新幹線)</span>
-                    </div>
-                    <span className="font-mono text-cyan-300 font-bold text-xl">約 45 分</span>
-                  </div>
-                  <div className="w-full bg-white/5 border border-white/10 rounded-full h-6 backdrop-blur-sm p-1 shadow-inner relative">
-                    {/* 45分は48時間の約1/64。視覚的にわかりやすく少し長めに描画 */}
-                    <div className="bg-gradient-to-r from-cyan-400 to-blue-500 h-full rounded-full w-[3%] shadow-[0_0_20px_rgba(34,211,238,0.8)] relative z-10"></div>
-                    {/* 差分を示す破線 */}
-                    <div className="absolute top-1/2 left-[3%] right-1 border-t border-dashed border-white/20 -translate-y-1/2"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-12 pt-8 border-t border-white/10 relative z-10">
-                <div className="flex gap-4 items-start bg-amber-500/10 p-5 rounded-2xl border border-amber-500/20">
-                  <ArrowDownCircle className="text-amber-400 flex-shrink-0" size={28} />
-                  <p className="text-sm md:text-base text-white/90 leading-relaxed">
-                    移動時間は <strong className="text-cyan-300 text-lg px-1">約 1/64</strong> に短縮。<br/>
-                    人類史の中で極めて短期間に流動性が高まった結果、首都圏などでは<strong className="text-amber-200 font-bold">地域内コミュニティの希薄化・欠如</strong>が深刻な課題となっている。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // ==========================================
-  // 3. 考察と展望セクション
-  // ==========================================
-  const ConclusionSection = () => (
-    <div id="conclusion" className="pt-20 pb-10 space-y-20 border-t border-white/10">
-      
-      {/* 考察 */}
-      <div>
-        <div className="flex items-center gap-4 mb-8">
-          <div className="p-3 bg-fuchsia-500/20 rounded-xl border border-fuchsia-400/30 shadow-[0_0_20px_rgba(217,70,239,0.2)]">
-            <Lightbulb className="text-fuchsia-300" size={28} />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-white">調査考察とメソッドの整理</h2>
-            <p className="text-fuchsia-200 mt-1">集団安定性向上への応用と推察</p>
-          </div>
-        </div>
-
-        <div className="bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 p-8 md:p-12 shadow-2xl relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-fuchsia-500/10 blur-[100px] rounded-full pointer-events-none"></div>
-
-          <p className="text-xl text-white mb-12 leading-relaxed font-light">
-            本年度のシミュレーション結果と昨年度以前の研究を統合し、地域社会の心理的安全性や集団の持続性を維持するための知見が整理されました。
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-16 relative z-10">
-            <div className="p-8 rounded-3xl bg-[#111827]/80 border border-white/10 hover:border-fuchsia-500/30 transition-colors backdrop-blur-md shadow-lg h-full">
-              <h4 className="text-fuchsia-300 font-bold text-xl mb-4 flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-fuchsia-500/20 flex items-center justify-center text-sm shadow-inner">1</span>
-                漸進的なモビリティの移行
-              </h4>
-              <p className="text-white/80 font-light leading-relaxed text-lg">
-                情報社会における急激な構造変化はコミュニティの崩壊リスクを高めます。安定化には、エンタルピーの急増を避け、<strong className="text-white font-bold bg-fuchsia-500/20 px-1 rounded">漸進的なモビリティの移行プロセスを設計</strong>することが不可欠であると推察されます。
-              </p>
-            </div>
-            
-            <div className="p-8 rounded-3xl bg-[#111827]/80 border border-white/10 hover:border-blue-500/30 transition-colors backdrop-blur-md shadow-lg h-full">
-              <h4 className="text-blue-300 font-bold text-xl mb-4 flex items-center gap-3">
-                <span className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-sm shadow-inner">2</span>
-                ミセル型統合法の組み込み
-              </h4>
-              <p className="text-white/80 font-light leading-relaxed text-lg">
-                単一集団の形成サイクルに加え、外部集団との統合プロセス（ミセル役の介入）を組み込むことで、周辺集団を円滑に包摂し、システム全体の安定性が向上することが示されました。
-              </p>
-            </div>
-          </div>
-
-          {/* 図解 3: メソッドの循環モデル */}
-          <div className="bg-black/40 rounded-3xl p-8 mb-16 border border-white/10 relative overflow-hidden flex flex-col items-center">
-            <h4 className="absolute top-6 left-6 text-white/60 font-bold text-sm tracking-widest uppercase">図解: 安定化メソッドの循環モデル</h4>
-            
-            <div className="relative w-full max-w-2xl mt-12 mb-8 flex flex-col items-center">
-               <div className="relative w-64 h-64 md:w-80 md:h-80">
-                 {/* 循環の矢印 */}
-                 <svg className="absolute inset-0 w-full h-full animate-[spin_30s_linear_infinite]" viewBox="0 0 100 100">
-                    <defs>
-                      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#d946ef" /> {/* Fuchsia */}
-                        <stop offset="100%" stopColor="#3b82f6" /> {/* Blue */}
-                      </linearGradient>
-                    </defs>
-                    <path d="M 50 10 A 40 40 0 1 1 10 50" fill="none" stroke="url(#grad)" strokeWidth="3" strokeDasharray="10,5" />
-                    <polygon points="10,50 5,40 15,40" fill="#3b82f6" transform="rotate(-20 10 50)" />
-                    
-                    <path d="M 50 90 A 40 40 0 0 1 10 50" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
-                    <path d="M 50 10 A 40 40 0 0 0 90 50" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
-                 </svg>
-
-                 {/* 中心のテキスト */}
-                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                   <RefreshCw className="text-white/30 mb-2" size={32} />
-                   <span className="font-bold text-white text-lg tracking-wider">集団の持続的<br/>安定化</span>
-                 </div>
-
-                 {/* ステップ要素 */}
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1e293b] border-2 border-fuchsia-400 text-fuchsia-100 px-4 py-2 rounded-xl text-sm font-bold shadow-lg whitespace-nowrap">
-                   1. 集団の形成
-                 </div>
-                 <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 bg-[#1e293b] border-2 border-blue-400 text-blue-100 px-4 py-2 rounded-xl text-sm font-bold shadow-lg whitespace-nowrap">
-                   2. 心理的距離の縮減<br/><span className="text-xs font-normal text-blue-300">(ミセル役の介入)</span>
-                 </div>
-                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-[#1e293b] border-2 border-emerald-400 text-emerald-100 px-4 py-2 rounded-xl text-sm font-bold shadow-lg whitespace-nowrap">
-                   3. 周辺集団の包摂
-                 </div>
-               </div>
-            </div>
-            
-            <p className="text-center text-white/80 font-light max-w-2xl mt-4">
-              前年度構築した循環モデルにおける「心理的距離の縮減」フェーズにミセル型統合法を導入。周辺集団を継続的に包摂することで、システム全体が強靭化される。
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-r from-fuchsia-500/20 to-blue-500/10 rounded-3xl p-8 md:p-10 border border-fuchsia-500/30 relative overflow-hidden z-10 shadow-xl">
-            <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-fuchsia-400 to-blue-400"></div>
-            <h4 className="font-bold text-white mb-6 text-2xl flex items-center gap-3">
-              <Target className="text-fuchsia-300" size={28}/> 結論と補足
-            </h4>
-            <p className="text-blue-50/90 mb-8 font-light leading-relaxed text-lg">
-              環境に応じた集会方式や交通インフラの移行速度を調整することで、構成員間のコミュニティ形成の最適なバランスを維持できることが示唆されています。
-            </p>
-            <div className="bg-amber-950/60 p-5 rounded-2xl border border-amber-500/40 backdrop-blur-sm">
-              <p className="text-sm text-amber-200/90 leading-relaxed">
-                <strong className="text-amber-400">※研究上の留意点：</strong> 昨年度以前の研究は本研究の道標となっていますが、中学生時代の作品がベースとなっているため論理の飛躍等も存在します。今後の研究により本メソッドは根本から変更される可能性が高いため、現時点のものをそのまま社会適用するのは慎重を要します。
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent my-16"></div>
-
-      {/* 展望 */}
-      <div className="text-center pt-8">
-        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-cyan-500/20 border-2 border-cyan-400/40 text-cyan-300 mb-8 shadow-[0_0_40px_rgba(34,211,238,0.3)] hover:scale-110 transition-transform duration-500">
-          <Compass size={48} />
-        </div>
-        <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white drop-shadow-lg">今後の展望</h2>
-        
-        <p className="text-xl text-blue-100/90 leading-relaxed mb-16 max-w-3xl mx-auto font-light">
-          次年度は本研究プロジェクトの最終フェーズにあたります。これまでに抽出された課題に基づく理論モデルおよび検証手法の修正を完了させ、実証的妥当性の高い<strong className="text-white font-bold px-2 text-2xl border-b-2 border-cyan-400">「集団増強メソッド」</strong>の構築を完了します。
-        </p>
-
-        <div className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto mb-24">
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[2.5rem] hover:-translate-y-2 hover:border-cyan-500/30 transition-all duration-500 text-left shadow-lg group">
-            <h3 className="font-bold text-2xl mb-5 text-cyan-300 flex items-center gap-3 group-hover:text-cyan-200 transition-colors">
-              <span className="block w-2 h-8 bg-cyan-400 rounded-full"></span>
-              協働と深化
-            </h3>
-            <p className="text-blue-100/80 leading-relaxed text-lg font-light">
-              学内外の多様な主体との協働を積極的に推進し、多角的な視点や外部知見を導入することで、研究のさらなる深化を図ります。
-            </p>
-          </div>
-          <div className="bg-gradient-to-br from-cyan-500/10 to-blue-600/10 backdrop-blur-xl border border-cyan-500/30 p-10 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(34,211,238,0.3)] transition-all duration-500 text-left relative overflow-hidden group">
-            <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-cyan-500/20 blur-[60px] rounded-full group-hover:bg-cyan-400/30 transition-colors"></div>
-            <h3 className="font-bold text-2xl mb-5 text-white flex items-center gap-3 relative z-10">
-              <span className="block w-2 h-8 bg-white rounded-full"></span>
-              社会実装へ
-            </h3>
-            <p className="text-blue-100/80 leading-relaxed text-lg font-light relative z-10">
-              最終的には、世界の多様な社会集団や組織において広く応用・社会実装されることを目標としています。
-            </p>
-          </div>
-        </div>
-
-        <div className="inline-block relative">
-          <div className="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-full"></div>
-          <div className="relative flex flex-col items-center">
-            <span className="font-serif italic text-3xl md:text-4xl text-white/90 mb-6 tracking-wider drop-shadow-md">"Everyday is good days."</span>
-            <div className="h-1 w-40 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="min-h-screen bg-[#0a0f1c] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-950 via-[#0a0f1c] to-slate-950 text-slate-800 font-sans selection:bg-blue-500/30 selection:text-blue-100 overflow-x-hidden scroll-smooth">
-      
-      {/* 背景装飾 */}
-      <div className="fixed top-0 left-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-      <div className="fixed bottom-0 right-0 w-[1000px] h-[1000px] bg-purple-600/10 rounded-full blur-[180px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
-
-      {/* ナビゲーションバー */}
-      <nav className="fixed w-full z-50 top-0 pt-4 px-4 sm:px-6 lg:px-8 transition-all duration-300">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-[#0f172a]/80 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-2xl px-5 md:px-8 h-16 flex justify-between items-center">
-            
-            <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => handleNavClick('overview')}>
-              <span className="font-bold text-xl tracking-tighter text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
-                A. Narahashi
-              </span>
-            </div>
-            
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-2">
-              {navLinks.map((link) => {
-                const isActive = activeTab === link.id;
-                return (
-                  <button 
-                    key={link.id} 
-                    onClick={() => handleNavClick(link.id)}
-                    className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
-                      isActive 
-                        ? 'bg-white/20 text-white shadow-[0_4px_15px_rgba(0,0,0,0.2)] border border-white/20 scale-105' 
-                        : 'text-white/60 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <link.icon size={18} className={isActive ? 'opacity-100' : 'opacity-70'} />
-                    {link.name}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)} 
-                className="text-white/80 hover:text-white p-2 rounded-lg hover:bg-white/10 focus:outline-none transition-colors"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-2 max-w-6xl mx-auto animate-fade-in">
-            <div className="bg-[#0f172a]/95 backdrop-blur-3xl border border-white/10 rounded-2xl px-2 pt-2 pb-3 space-y-1 shadow-2xl">
-              {navLinks.map((link) => {
-                const isActive = activeTab === link.id;
-                return (
-                  <button
-                    key={link.id}
-                    onClick={() => handleNavClick(link.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-4 rounded-xl text-base font-bold transition-colors ${
-                      isActive 
-                        ? 'bg-blue-500/30 text-white border border-blue-500/40' 
-                        : 'text-white/70 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <link.icon size={20} className={isActive ? 'text-blue-400' : 'opacity-70'} />
-                    {link.name}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* メインコンテンツ（全セクションを縦に配置） */}
-      <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 flex flex-col items-center relative z-10">
-        <div className="w-full max-w-6xl">
-          <div className="bg-white/[0.03] backdrop-blur-[50px] border border-white/10 shadow-[0_8px_40px_0_rgba(0,0,0,0.6)] rounded-[3rem] p-6 md:p-12 lg:p-20 relative overflow-hidden">
-            {/* 上部のハイライト */}
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-            
-            <OverviewSection />
-            <FindingsSection />
-            <ConclusionSection />
-            
-          </div>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-white/5 py-12 text-center relative z-10 bg-black/40 backdrop-blur-2xl mt-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <p className="font-bold text-white/90 mb-2 text-xl tracking-wide">奈良橋 篤生</p>
-          <p className="text-sm text-white/60 mb-8 font-light tracking-widest uppercase">Atsuki Narahashi</p>
-          <p className="text-sm text-white/60 mb-6 font-light">横浜創英中学/高等学校 サイエンスコース 第1期生</p>
-          <div className="h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-8"></div>
-          <p className="text-xs text-white/40 tracking-widest uppercase">
-            &copy; {new Date().getFullYear()} A. Narahashi. All rights reserved.
-          </p>
-        </div>
-      </footer>
-
-      <style dangerouslySetInnerHTML={{__html: `
+    <style>
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in {
-          animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         html {
-          scroll-behavior: smooth;
+            scroll-behavior: smooth;
         }
-      `}} />
-    </div>
-  );
-};
+        /* スクロールバーのカスタマイズ（オプション） */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0f1c; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4); 
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-[#0a0f1c] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-950 via-[#0a0f1c] to-slate-950 text-slate-800 font-sans selection:bg-blue-500/30 selection:text-blue-100 overflow-x-hidden">
 
-export default App;
+    <!-- 背景装飾 -->
+    <div class="fixed top-0 left-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+    <div class="fixed bottom-0 right-0 w-[1000px] h-[1000px] bg-purple-600/10 rounded-full blur-[180px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+
+    <!-- ナビゲーションバー -->
+    <nav class="fixed w-full z-50 top-0 pt-4 px-4 sm:px-6 lg:px-8 transition-all duration-300">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-[#0f172a]/80 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-2xl px-5 md:px-8 h-16 flex justify-between items-center">
+                
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="scrollToSection('overview')">
+                    <span class="font-bold text-xl tracking-tighter text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
+                        A. Narahashi
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-2">
+                    <button data-id="overview" class="nav-link flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 bg-white/20 text-white shadow-[0_4px_15px_rgba(0,0,0,0.2)] border border-white/20 scale-105">
+                        <i data-lucide="book-open" class="w-[18px] h-[18px] opacity-100"></i>
+                        研究概要
+                    </button>
+                    <button data-id="findings" class="nav-link flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 text-white/60 hover:text-white hover:bg-white/10 border border-transparent">
+                        <i data-lucide="network" class="w-[18px] h-[18px] opacity-70"></i>
+                        調査結果
+                    </button>
+                    <button data-id="conclusion" class="nav-link flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 text-white/60 hover:text-white hover:bg-white/10 border border-transparent">
+                        <i data-lucide="compass" class="w-[18px] h-[18px] opacity-70"></i>
+                        考察と展望
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white/80 hover:text-white p-2 rounded-lg hover:bg-white/10 focus:outline-none transition-colors">
+                        <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+                        <i data-lucide="x" id="close-icon" class="w-6 h-6 hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden mt-2 max-w-6xl mx-auto animate-fade-in md:hidden">
+            <div class="bg-[#0f172a]/95 backdrop-blur-3xl border border-white/10 rounded-2xl px-2 pt-2 pb-3 space-y-1 shadow-2xl">
+                <button data-id="overview" class="mobile-nav-link w-full flex items-center gap-3 px-4 py-4 rounded-xl text-base font-bold transition-colors bg-blue-500/30 text-white border border-blue-500/40">
+                    <i data-lucide="book-open" class="w-5 h-5 text-blue-400"></i>
+                    研究概要
+                </button>
+                <button data-id="findings" class="mobile-nav-link w-full flex items-center gap-3 px-4 py-4 rounded-xl text-base font-bold transition-colors text-white/70 hover:text-white hover:bg-white/10 border border-transparent">
+                    <i data-lucide="network" class="w-5 h-5 opacity-70"></i>
+                    調査結果
+                </button>
+                <button data-id="conclusion" class="mobile-nav-link w-full flex items-center gap-3 px-4 py-4 rounded-xl text-base font-bold transition-colors text-white/70 hover:text-white hover:bg-white/10 border border-transparent">
+                    <i data-lucide="compass" class="w-5 h-5 opacity-70"></i>
+                    考察と展望
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 flex flex-col items-center relative z-10">
+        <div class="w-full max-w-6xl">
+            <div class="bg-white/[0.03] backdrop-blur-[50px] border border-white/10 shadow-[0_8px_40px_0_rgba(0,0,0,0.6)] rounded-[3rem] p-6 md:p-12 lg:p-20 relative overflow-hidden">
+                <!-- 上部のハイライト -->
+                <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+                
+                <!-- ========================================== -->
+                <!-- 1. 研究概要セクション -->
+                <!-- ========================================== -->
+                <div id="overview" class="pt-8 pb-20 space-y-24">
+                    <!-- ヒーローヘッダー -->
+                    <div class="text-center md:text-left animate-fade-in">
+                        <span class="inline-block py-1.5 px-4 rounded-full bg-white/10 border border-white/20 text-blue-200 text-sm font-semibold tracking-wider mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            RESEARCH PORTFOLIO 2025-2026
+                        </span>
+                        <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-8 text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200 drop-shadow-sm">
+                            規模に依存しない<br />社会集団安定化メソッドの開発
+                        </h1>
+                        <p class="text-xl md:text-2xl text-blue-100 mb-12 font-light leading-relaxed max-w-3xl">
+                            いかにして崩壊に対する耐性が高く、持続可能な集団を形成しうるか。
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row items-center gap-6 text-base font-medium text-blue-200 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md inline-flex shadow-lg">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="users" width="20" height="20" class="text-blue-400"></i>
+                                <span>横浜創英中学/高等学校 サイエンスコース 第1期生</span>
+                            </div>
+                            <div class="hidden sm:block text-blue-400/50">|</div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-white text-xl font-bold tracking-wide">奈良橋 篤生</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="h-px w-full bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"></div>
+
+                    <!-- 探究概要 -->
+                    <div class="space-y-12">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 bg-blue-500/20 rounded-xl border border-blue-400/30 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                                <i data-lucide="book-open" width="28" height="28" class="text-blue-300"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-white">探究概要</h2>
+                                <p class="text-blue-200 mt-1">多視点からのアプローチ</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-12 gap-10">
+                            <div class="md:col-span-6 space-y-6 text-lg text-blue-50/90 leading-relaxed font-light">
+                                <p class="text-xl text-white font-medium border-l-4 border-blue-400 pl-4 py-1 bg-gradient-to-r from-blue-500/10 to-transparent">
+                                    人間の社会生活において、集団への所属は生存および適応の必須条件である。
+                                </p>
+                                <p>
+                                    家族や地域コミュニティなどの第一次集団、あるいは学校や企業等の第二次集団をはじめ、個人は常に重層的な集団構造のなかに位置づけられています。一般的に、これらの所属集団は単なる生活の場にとどまらず、個人の社会的アイデンティティを形成し、自己の心理的安定をもたらす重要な基盤として機能しています。
+                                </p>
+                                <p>
+                                    しかしながら、社会集団や所属組織が機能不全に陥り、崩壊や解散に至る事例は枚挙に暇がありません。身近な集団の維持および崩壊は、個人の生活充実性に直結する看過できない課題です。
+                                </p>
+                                <p>
+                                    本研究では、対人関係理論などの小規模に限定される解決策ではなく、<strong class="text-white font-bold bg-blue-500/20 px-2 py-0.5 rounded">グループ・ダイナミックス等の大規模な集団に対応しうる手段</strong>を基盤として、安定化メソッドの開拓を進めています。
+                                </p>
+                            </div>
+                            
+                            <div class="md:col-span-6 space-y-6">
+                                <!-- 図解 1: 重層的な集団構造 -->
+                                <div class="bg-black/30 border border-white/10 p-8 rounded-3xl backdrop-blur-md relative overflow-hidden flex flex-col items-center justify-center min-h-[300px]">
+                                    <h3 class="absolute top-6 left-6 text-white/80 font-bold text-sm tracking-widest uppercase">図解: 重層的な社会集団構造</h3>
+                                    
+                                    <div class="relative flex items-center justify-center w-full h-48 mt-8">
+                                        <!-- 第二次集団 -->
+                                        <div class="absolute w-48 h-48 rounded-full border border-blue-400/30 bg-blue-900/10 flex items-start justify-center pt-2">
+                                            <span class="text-xs text-blue-300 font-medium flex items-center gap-1">
+                                                <i data-lucide="building-2" width="12" height="12"></i> 第二次集団 (学校・企業)
+                                            </span>
+                                        </div>
+                                        <!-- 第一次集団 -->
+                                        <div class="absolute w-32 h-32 rounded-full border border-emerald-400/40 bg-emerald-900/20 flex items-start justify-center pt-2 shadow-[0_0_30px_rgba(16,185,129,0.1)] z-10">
+                                            <span class="text-xs text-emerald-300 font-medium flex items-center gap-1">
+                                                <i data-lucide="users" width="12" height="12"></i> 第一次集団 (家族・地域)
+                                            </span>
+                                        </div>
+                                        <!-- 個人 -->
+                                        <div class="absolute w-16 h-16 rounded-full border border-white/50 bg-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)] z-20 backdrop-blur-md">
+                                            <i data-lucide="user" width="24" height="24" class="text-white"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-center text-white/60 mt-6 max-w-xs">
+                                        個人は常に複数のコミュニティに内包され、その崩壊は個人の心理的安全性に直結する。
+                                    </p>
+                                </div>
+                                <!-- リスクのリスト -->
+                                <div class="bg-red-500/10 border border-red-500/30 p-6 rounded-3xl backdrop-blur-md relative overflow-hidden">
+                                    <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/20 blur-[50px] rounded-full"></div>
+                                    <h3 class="text-red-300 font-bold text-lg mb-4 flex items-center gap-2 relative z-10">
+                                        <i data-lucide="activity" width="20" height="20"></i> 集団崩壊のリスク連鎖
+                                    </h3>
+                                    <ul class="space-y-3 text-red-100/90 text-sm relative z-10 font-light">
+                                        <li class="flex items-start gap-3">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+                                            <span>機能不全によるコミュニティの解散</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+                                            <span>集団凝集性の低下と心理的安全性の喪失</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+                                            <span class="font-medium text-white">個人の帰属意識低下に伴う心身への重大なストレス</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 今期の研究 -->
+                    <div class="pt-8">
+                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <i data-lucide="zap" width="24" height="24" class="text-yellow-400"></i> 今期の研究プロセス
+                        </h3>
+                        <p class="text-lg text-blue-50/90 mb-8 font-light leading-relaxed">
+                            本年度は、主幹テーマである「集団増強メソッドの構築」に向けた多角的な実証データの蓄積を目的とし、前年度よりも研究対象の細分化を図りました。
+                        </p>
+                        <!-- プロセス図解 -->
+                        <div class="relative">
+                            <!-- 繋ぎの線 -->
+                            <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-500/20 via-white/20 to-purple-500/20 -translate-y-1/2 rounded-full"></div>
+                            
+                            <div class="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
+                                <!-- 前期 -->
+                                <div class="bg-[#111827]/80 border border-blue-500/30 p-8 rounded-3xl backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(59,130,246,0.2)]">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center text-xl font-bold border border-blue-400/50 shadow-inner">
+                                            前
+                                        </div>
+                                        <h4 class="text-xl font-bold text-white">仮説生成と予測的実験</h4>
+                                    </div>
+                                    <ul class="space-y-4 text-blue-100/80 font-light text-base">
+                                        <li class="flex gap-3 items-start"><i data-lucide="chevron-right" width="18" height="18" class="text-blue-400 flex-shrink-0 mt-1"></i> <span>日常的な社会生活や教育環境から要因を抽出</span></li>
+                                        <li class="flex gap-3 items-start"><i data-lucide="chevron-right" width="18" height="18" class="text-blue-400 flex-shrink-0 mt-1"></i> <span>計算機シミュレーションによる継続的な実験</span></li>
+                                        <li class="flex gap-3 items-start"><i data-lucide="chevron-right" width="18" height="18" class="text-blue-400 flex-shrink-0 mt-1"></i> <span>数理モデル化を通じた仮説の検証</span></li>
+                                    </ul>
+                                </div>
+                                <!-- 後期 -->
+                                <div class="bg-[#111827]/80 border border-purple-500/30 p-8 rounded-3xl backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(168,85,247,0.2)]">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <div class="w-12 h-12 rounded-full bg-purple-500/20 text-purple-300 flex items-center justify-center text-xl font-bold border border-purple-400/50 shadow-inner">
+                                            後
+                                        </div>
+                                        <h4 class="text-xl font-bold text-white">データ統合と理論の一般化</h4>
+                                    </div>
+                                    <ul class="space-y-4 text-purple-100/80 font-light text-base">
+                                        <li class="flex gap-3 items-start"><i data-lucide="chevron-right" width="18" height="18" class="text-purple-400 flex-shrink-0 mt-1"></i> <span>縦断的調査データの統合と分析</span></li>
+                                        <li class="flex gap-3 items-start"><i data-lucide="chevron-right" width="18" height="18" class="text-purple-400 flex-shrink-0 mt-1"></i> <span>前年度の課題列挙と研究計画の修正</span></li>
+                                        <li class="flex gap-3 items-start"><i data-lucide="chevron-right" width="18" height="18" class="text-purple-400 flex-shrink-0 mt-1"></i> <span>外部への情報発信と発表力の強化</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- 2. 調査結果セクション -->
+                <!-- ========================================== -->
+                <div id="findings" class="pt-20 pb-20 space-y-16 border-t border-white/10">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="p-3 bg-emerald-500/20 rounded-xl border border-emerald-400/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                            <i data-lucide="network" width="28" height="28" class="text-emerald-300"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-white">調査結果と分析</h2>
+                            <p class="text-emerald-200 mt-1">マルチエージェント・シミュレーション環境を用いた大規模検証</p>
+                        </div>
+                    </div>
+
+                    <!-- Case 1: Micelle -->
+                    <div class="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div class="mb-6 inline-block px-4 py-1.5 bg-emerald-500/20 border border-emerald-500/30 rounded-full text-emerald-300 text-sm font-bold tracking-widest shadow-lg">
+                            前期調査
+                        </div>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-10">複数集団に対するミセル的統合法の有効性</h3>
+                        
+                        <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                            <div class="space-y-6 text-blue-50/90 text-lg font-light leading-relaxed">
+                                <p>
+                                    複数集団の統合および分化のダイナミクスに着目し、物理化学における界面活性剤の乳化作用（ミセル形成）を社会的ネットワーク構造に援用しました。
+                                </p>
+                                <div class="p-6 bg-black/30 border-l-4 border-emerald-400 rounded-r-2xl backdrop-blur-md shadow-inner">
+                                    <strong class="text-white text-xl block mb-2">検証仮説</strong>
+                                    「複数の集団に所属する個人が異質集団間の結節点となり、コミュニティの統合を促進する」
+                                    <br/><span class="text-sm text-emerald-300 mt-2 block">※仮想空間上に1,000個体のエージェントを配置して検証</span>
+                                </div>
+                                <div class="mt-6 space-y-3">
+                                    <h4 class="font-bold text-emerald-300 text-xl flex items-center gap-2">
+                                        <i data-lucide="target" width="20" height="20"></i> シミュレーション結果
+                                    </h4>
+                                    <p>
+                                        統制群では機能不全に伴う内部分分裂が発生したのに対し、集団間を媒介する<strong class="text-white font-bold bg-emerald-500/20 px-2 rounded">「ミセル役」を10個体投入した実験群では、コミュニティの流動性が向上</strong>し、分裂発生率が大幅に減少しました。
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 図解 2: ミセル的統合法 -->
+                            <div class="bg-black/40 rounded-3xl p-8 flex flex-col items-center justify-center min-h-[350px] border border-white/10 relative overflow-hidden backdrop-blur-xl shadow-2xl">
+                                <h4 class="absolute top-6 left-6 text-white/60 font-bold text-sm tracking-widest uppercase z-30">図解: ミセル役による集団の媒介</h4>
+                                
+                                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 mix-blend-overlay"></div>
+                                
+                                <div class="w-full relative z-20 mt-8">
+                                    <div class="flex justify-center items-center gap-8 md:gap-16 relative">
+                                        
+                                        <!-- 背景のネットワークの線 -->
+                                        <svg class="absolute inset-0 w-full h-full" style="z-index: -1;">
+                                            <line x1="20%" y1="50%" x2="50%" y2="50%" stroke="rgba(52,211,153,0.3)" stroke-width="2" stroke-dasharray="5,5" />
+                                            <line x1="80%" y1="50%" x2="50%" y2="50%" stroke="rgba(52,211,153,0.3)" stroke-width="2" stroke-dasharray="5,5" />
+                                        </svg>
+
+                                        <!-- 集団 A -->
+                                        <div class="relative group">
+                                            <div class="absolute -inset-4 bg-blue-500/20 blur-xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                                            <div class="w-28 h-28 rounded-full bg-[#1e293b] border-2 border-blue-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.3)] relative z-10">
+                                                <span class="font-bold text-blue-100 text-lg">集団 A</span>
+                                                <div class="flex gap-1 mt-2">
+                                                    <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                                                    <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                                                    <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ミセル役 -->
+                                        <div class="relative z-30 transform hover:scale-110 transition-transform cursor-pointer">
+                                            <div class="absolute -inset-3 bg-emerald-400/30 blur-lg rounded-full animate-pulse"></div>
+                                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex flex-col items-center justify-center shadow-[0_0_25px_rgba(52,211,153,0.6)] border-2 border-white ring-4 ring-black/50">
+                                                <i data-lucide="share-2" width="24" height="24" class="mb-1"></i>
+                                                <span class="font-bold text-xs">ミセル役</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- 集団 B -->
+                                        <div class="relative group">
+                                            <div class="absolute -inset-4 bg-purple-500/20 blur-xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                                            <div class="w-28 h-28 rounded-full bg-[#1e293b] border-2 border-purple-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(168,85,247,0.3)] relative z-10">
+                                                <span class="font-bold text-purple-100 text-lg">集団 B</span>
+                                                <div class="flex gap-1 mt-2">
+                                                    <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                                                    <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                                                    <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-12 text-center">
+                                        <p class="text-sm text-emerald-100/90 bg-black/60 px-6 py-3 rounded-xl inline-block backdrop-blur-md border border-white/10 shadow-lg">
+                                            内部・外部で異なる性質（極）を引き付け、<br/>異質集団間の結節点として機能する
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 2: Entropy & Traffic -->
+                    <div class="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="mb-6 inline-block px-4 py-1.5 bg-amber-500/20 border border-amber-500/30 rounded-full text-amber-300 text-sm font-bold tracking-widest shadow-lg">
+                            後期調査（中核検証）
+                        </div>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-10">交通網の発達に伴う「社会的エンタルピー」の増大とコミュニティの変容</h3>
+                        
+                        <div class="grid lg:grid-cols-2 gap-12">
+                            <div class="space-y-6 text-blue-50/90 text-lg font-light leading-relaxed">
+                                <p>
+                                    検証にあたり、仮想空間上に<strong class="text-white font-medium text-xl bg-amber-500/20 px-2 rounded">10,000個体</strong>のエージェントと複数のコミュニティ・クラスターをランダムに配置した大規模シミュレーションを構築しました。
+                                </p>
+                                <p>
+                                    エージェント間の移動速度を任意に操作可能な交通モデルを導入し、移動速度の変化に伴う人員の流動とコミュニティ構造の遷移過程を観測しました。
+                                </p>
+                                
+                                <div class="bg-black/30 p-6 md:p-8 rounded-2xl border border-white/10 backdrop-blur-md shadow-inner">
+                                    <h4 class="font-bold text-amber-300 mb-4 flex items-center gap-2 text-xl">
+                                        <i data-lucide="lightbulb" width="24" height="24"></i> 分析結果と示唆
+                                    </h4>
+                                    <p class="mb-4">
+                                        シミュレーションの結果、コミュニティの安定性を担保する絶対的かつ静的な最適値は見出されませんでした。
+                                    </p>
+                                    <div class="border-l-4 border-amber-400 pl-5 py-2 bg-gradient-to-r from-amber-500/10 to-transparent">
+                                        <p class="text-white font-medium">
+                                            コミュニティ構造の変容は、<strong class="font-bold text-amber-200 text-xl">移動速度の絶対値ではなく、初期状態からの相対的な変化率に強く依存</strong>することが明らかとなりました。
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="pt-2">
+                                    交通インフラや情報通信網の急激な発達は、社会システム内の<strong class="text-white font-bold border-b border-amber-400">社会的エンタルピー（無秩序さ・流動性）</strong>を急増させ、コミュニティの急激な再編や機能不全を引き起こすリスクを伴うことが示唆されました。
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col h-full">
+                                <!-- 交通比較グラフィック -->
+                                <div class="bg-[#111827]/90 rounded-3xl p-8 md:p-10 border border-white/10 relative overflow-hidden h-full flex flex-col justify-center shadow-2xl">
+                                    <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+                                    
+                                    <h4 class="absolute top-6 left-6 text-white/60 font-bold text-sm tracking-widest uppercase">図解: モビリティの進化と影響</h4>
+                                    <div class="text-center mt-6 mb-12">
+                                        <h5 class="font-bold text-2xl text-white tracking-wide mb-2">
+                                            200年間での移動時間の変化
+                                        </h5>
+                                        <span class="inline-block px-3 py-1 bg-white/10 rounded-full text-sm text-white/80">東京・小田原間 のケース</span>
+                                    </div>
+                                    
+                                    <div class="space-y-12 relative z-10 w-full max-w-md mx-auto">
+                                        <!-- 1826年 -->
+                                        <div class="relative group">
+                                            <div class="flex justify-between items-end mb-3">
+                                                <div class="flex items-center gap-2">
+                                                    <i data-lucide="user" width="20" height="20" class="text-amber-200/70"></i>
+                                                    <span class="font-medium text-amber-100/90 text-lg">1826年 (徒歩)</span>
+                                                </div>
+                                                <span class="font-mono text-amber-300 font-bold text-xl">約 48 時間</span>
+                                            </div>
+                                            <div class="w-full bg-white/5 border border-white/10 rounded-full h-6 backdrop-blur-sm overflow-hidden p-1 shadow-inner">
+                                                <div class="bg-amber-500/40 h-full rounded-full w-full relative"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 2026年 -->
+                                        <div class="relative group">
+                                            <div class="flex justify-between items-end mb-3">
+                                                <div class="flex items-center gap-2">
+                                                    <i data-lucide="train-front" width="20" height="20" class="text-cyan-300"></i>
+                                                    <span class="font-medium text-cyan-100/90 text-lg">2026年 (新幹線)</span>
+                                                </div>
+                                                <span class="font-mono text-cyan-300 font-bold text-xl">約 45 分</span>
+                                            </div>
+                                            <div class="w-full bg-white/5 border border-white/10 rounded-full h-6 backdrop-blur-sm p-1 shadow-inner relative">
+                                                <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full rounded-full w-[3%] shadow-[0_0_20px_rgba(34,211,238,0.8)] relative z-10"></div>
+                                                <div class="absolute top-1/2 left-[3%] right-1 border-t border-dashed border-white/20 -translate-y-1/2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-12 pt-8 border-t border-white/10 relative z-10">
+                                        <div class="flex gap-4 items-start bg-amber-500/10 p-5 rounded-2xl border border-amber-500/20">
+                                            <i data-lucide="arrow-down-circle" width="28" height="28" class="text-amber-400 flex-shrink-0"></i>
+                                            <p class="text-sm md:text-base text-white/90 leading-relaxed">
+                                                移動時間は <strong class="text-cyan-300 text-lg px-1">約 1/64</strong> に短縮。<br/>
+                                                人類史の中で極めて短期間に流動性が高まった結果、首都圏などでは<strong class="text-amber-200 font-bold">地域内コミュニティの希薄化・欠如</strong>が深刻な課題となっている。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================== -->
+                <!-- 3. 考察と展望セクション -->
+                <!-- ========================================== -->
+                <div id="conclusion" class="pt-20 pb-10 space-y-20 border-t border-white/10">
+                    
+                    <!-- 考察 -->
+                    <div>
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="p-3 bg-fuchsia-500/20 rounded-xl border border-fuchsia-400/30 shadow-[0_0_20px_rgba(217,70,239,0.2)]">
+                                <i data-lucide="lightbulb" width="28" height="28" class="text-fuchsia-300"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold text-white">調査考察とメソッドの整理</h2>
+                                <p class="text-fuchsia-200 mt-1">集団安定性向上への応用と推察</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                            <div class="absolute -top-40 -right-40 w-96 h-96 bg-fuchsia-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+                            <p class="text-xl text-white mb-12 leading-relaxed font-light">
+                                本年度のシミュレーション結果と昨年度以前の研究を統合し、地域社会の心理的安全性や集団の持続性を維持するための知見が整理されました。
+                            </p>
+                            
+                            <div class="grid md:grid-cols-2 gap-8 mb-16 relative z-10">
+                                <div class="p-8 rounded-3xl bg-[#111827]/80 border border-white/10 hover:border-fuchsia-500/30 transition-colors backdrop-blur-md shadow-lg h-full">
+                                    <h4 class="text-fuchsia-300 font-bold text-xl mb-4 flex items-center gap-3">
+                                        <span class="w-8 h-8 rounded-full bg-fuchsia-500/20 flex items-center justify-center text-sm shadow-inner">1</span>
+                                        漸進的なモビリティの移行
+                                    </h4>
+                                    <p class="text-white/80 font-light leading-relaxed text-lg">
+                                        情報社会における急激な構造変化はコミュニティの崩壊リスクを高めます。安定化には、エンタルピーの急増を避け、<strong class="text-white font-bold bg-fuchsia-500/20 px-1 rounded">漸進的なモビリティの移行プロセスを設計</strong>することが不可欠であると推察されます。
+                                    </p>
+                                </div>
+                                
+                                <div class="p-8 rounded-3xl bg-[#111827]/80 border border-white/10 hover:border-blue-500/30 transition-colors backdrop-blur-md shadow-lg h-full">
+                                    <h4 class="text-blue-300 font-bold text-xl mb-4 flex items-center gap-3">
+                                        <span class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-sm shadow-inner">2</span>
+                                        ミセル型統合法の組み込み
+                                    </h4>
+                                    <p class="text-white/80 font-light leading-relaxed text-lg">
+                                        単一集団の形成サイクルに加え、外部集団との統合プロセス（ミセル役の介入）を組み込むことで、周辺集団を円滑に包摂し、システム全体の安定性が向上することが示されました。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 図解 3: メソッドの循環モデル -->
+                            <div class="bg-black/40 rounded-3xl p-8 mb-16 border border-white/10 relative overflow-hidden flex flex-col items-center">
+                                <h4 class="absolute top-6 left-6 text-white/60 font-bold text-sm tracking-widest uppercase">図解: 安定化メソッドの循環モデル</h4>
+                                
+                                <div class="relative w-full max-w-2xl mt-12 mb-8 flex flex-col items-center">
+                                    <div class="relative w-64 h-64 md:w-80 md:h-80">
+                                        <!-- 循環の矢印 -->
+                                        <svg class="absolute inset-0 w-full h-full animate-[spin_30s_linear_infinite]" viewBox="0 0 100 100">
+                                            <defs>
+                                                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" stop-color="#d946ef" />
+                                                    <stop offset="100%" stop-color="#3b82f6" />
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M 50 10 A 40 40 0 1 1 10 50" fill="none" stroke="url(#grad)" stroke-width="3" stroke-dasharray="10,5" />
+                                            <polygon points="10,50 5,40 15,40" fill="#3b82f6" transform="rotate(-20 10 50)" />
+                                            <path d="M 50 90 A 40 40 0 0 1 10 50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+                                            <path d="M 50 10 A 40 40 0 0 0 90 50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+                                        </svg>
+                                        
+                                        <!-- 中心のテキスト -->
+                                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                                            <i data-lucide="refresh-cw" width="32" height="32" class="text-white/30 mb-2"></i>
+                                            <span class="font-bold text-white text-lg tracking-wider">集団の持続的<br/>安定化</span>
+                                        </div>
+                                        
+                                        <!-- ステップ要素 -->
+                                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1e293b] border-2 border-fuchsia-400 text-fuchsia-100 px-4 py-2 rounded-xl text-sm font-bold shadow-lg whitespace-nowrap">
+                                            1. 集団の形成
+                                        </div>
+                                        <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 bg-[#1e293b] border-2 border-blue-400 text-blue-100 px-4 py-2 rounded-xl text-sm font-bold shadow-lg whitespace-nowrap">
+                                            2. 心理的距離の縮減<br/><span class="text-xs font-normal text-blue-300">(ミセル役の介入)</span>
+                                        </div>
+                                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-[#1e293b] border-2 border-emerald-400 text-emerald-100 px-4 py-2 rounded-xl text-sm font-bold shadow-lg whitespace-nowrap">
+                                            3. 周辺集団の包摂
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-center text-white/80 font-light max-w-2xl mt-4">
+                                    前年度構築した循環モデルにおける「心理的距離の縮減」フェーズにミセル型統合法を導入。周辺集団を継続的に包摂することで、システム全体が強靭化される。
+                                </p>
+                            </div>
+
+                            <div class="bg-gradient-to-r from-fuchsia-500/20 to-blue-500/10 rounded-3xl p-8 md:p-10 border border-fuchsia-500/30 relative overflow-hidden z-10 shadow-xl">
+                                <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-fuchsia-400 to-blue-400"></div>
+                                <h4 class="font-bold text-white mb-6 text-2xl flex items-center gap-3">
+                                    <i data-lucide="target" width="28" height="28" class="text-fuchsia-300"></i> 結論と補足
+                                </h4>
+                                <p class="text-blue-50/90 mb-8 font-light leading-relaxed text-lg">
+                                    環境に応じた集会方式や交通インフラの移行速度を調整することで、構成員間のコミュニティ形成の最適なバランスを維持できることが示唆されています。
+                                </p>
+                                <div class="bg-amber-950/60 p-5 rounded-2xl border border-amber-500/40 backdrop-blur-sm">
+                                    <p class="text-sm text-amber-200/90 leading-relaxed">
+                                        <strong class="text-amber-400">※研究上の留意点：</strong> 昨年度以前の研究は本研究の道標となっていますが、中学生時代の作品がベースとなっているため論理の飛躍等も存在します。今後の研究により本メソッドは根本から変更される可能性が高いため、現時点のものをそのまま社会適用するのは慎重を要します。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent my-16"></div>
+
+                    <!-- 展望 -->
+                    <div class="text-center pt-8">
+                        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-cyan-500/20 border-2 border-cyan-400/40 text-cyan-300 mb-8 shadow-[0_0_40px_rgba(34,211,238,0.3)] hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="compass" width="48" height="48"></i>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white drop-shadow-lg">今後の展望</h2>
+                        
+                        <p class="text-xl text-blue-100/90 leading-relaxed mb-16 max-w-3xl mx-auto font-light">
+                            次年度は本研究プロジェクトの最終フェーズにあたります。これまでに抽出された課題に基づく理論モデルおよび検証手法の修正を完了させ、実証的妥当性の高い<strong class="text-white font-bold px-2 text-2xl border-b-2 border-cyan-400">「集団増強メソッド」</strong>の構築を完了します。
+                        </p>
+
+                        <div class="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto mb-24">
+                            <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[2.5rem] hover:-translate-y-2 hover:border-cyan-500/30 transition-all duration-500 text-left shadow-lg group">
+                                <h3 class="font-bold text-2xl mb-5 text-cyan-300 flex items-center gap-3 group-hover:text-cyan-200 transition-colors">
+                                    <span class="block w-2 h-8 bg-cyan-400 rounded-full"></span>
+                                    協働と深化
+                                </h3>
+                                <p class="text-blue-100/80 leading-relaxed text-lg font-light">
+                                    学内外の多様な主体との協働を積極的に推進し、多角的な視点や外部知見を導入することで、研究のさらなる深化を図ります。
+                                </p>
+                            </div>
+                            <div class="bg-gradient-to-br from-cyan-500/10 to-blue-600/10 backdrop-blur-xl border border-cyan-500/30 p-10 rounded-[2.5rem] hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(34,211,238,0.3)] transition-all duration-500 text-left relative overflow-hidden group">
+                                <div class="absolute -bottom-20 -right-20 w-48 h-48 bg-cyan-500/20 blur-[60px] rounded-full group-hover:bg-cyan-400/30 transition-colors"></div>
+                                <h3 class="font-bold text-2xl mb-5 text-white flex items-center gap-3 relative z-10">
+                                    <span class="block w-2 h-8 bg-white rounded-full"></span>
+                                    社会実装へ
+                                </h3>
+                                <p class="text-blue-100/80 leading-relaxed text-lg font-light relative z-10">
+                                    最終的には、世界の多様な社会集団や組織において広く応用・社会実装されることを目標としています。
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="inline-block relative">
+                            <div class="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-full"></div>
+                            <div class="relative flex flex-col items-center">
+                                <span class="font-serif italic text-3xl md:text-4xl text-white/90 mb-6 tracking-wider drop-shadow-md">"Everyday is good days."</span>
+                                <div class="h-1 w-40 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 text-center relative z-10 bg-black/40 backdrop-blur-2xl mt-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="font-bold text-white/90 mb-2 text-xl tracking-wide">奈良橋 篤生</p>
+            <p class="text-sm text-white/60 mb-8 font-light tracking-widest uppercase">Atsuki Narahashi</p>
+            <p class="text-sm text-white/60 mb-6 font-light">横浜創英中学/高等学校 サイエンスコース 第1期生</p>
+            <div class="h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-8"></div>
+            <p class="text-xs text-white/40 tracking-widest uppercase" id="copyright-year">
+                &copy; 2026 A. Narahashi. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript ロジック -->
+    <script>
+        // 1. Lucideアイコンの初期化
+        lucide.createIcons();
+
+        // コピーライトの年を自動更新
+        document.getElementById('copyright-year').innerHTML = `&copy; ${new Date().getFullYear()} A. Narahashi. All rights reserved.`;
+
+        // 状態管理変数
+        let activeTab = 'overview';
+        let isMenuOpen = false;
+
+        // DOM要素の取得
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        // モバイルメニューのトグル
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.parentElement.innerHTML = '<i data-lucide="x" id="close-icon" class="w-6 h-6"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.parentElement.innerHTML = '<i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>';
+            }
+            lucide.createIcons(); // アイコン再生成
+        });
+
+        // スムーススクロール関数
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                // ヘッダーの高さを考慮して少し上にずらす
+                const y = element.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+            
+            // モバイルメニューが開いていれば閉じる
+            if (isMenuOpen) {
+                isMenuOpen = false;
+                mobileMenu.classList.add('hidden');
+                document.getElementById('mobile-menu-btn').innerHTML = '<i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>';
+                lucide.createIcons();
+            }
+        }
+
+        // アクティブなナビゲーションのスタイル更新
+        function updateActiveNav(id) {
+            if (activeTab === id) return;
+            activeTab = id;
+
+            // デスクトップナビの更新
+            navLinks.forEach(link => {
+                const icon = link.querySelector('svg');
+                if (link.dataset.id === id) {
+                    // Active style
+                    link.className = 'nav-link flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 bg-white/20 text-white shadow-[0_4px_15px_rgba(0,0,0,0.2)] border border-white/20 scale-105';
+                    if (icon) { icon.classList.remove('opacity-70'); icon.classList.add('opacity-100'); }
+                } else {
+                    // Inactive style
+                    link.className = 'nav-link flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 text-white/60 hover:text-white hover:bg-white/10 border border-transparent';
+                    if (icon) { icon.classList.remove('opacity-100'); icon.classList.add('opacity-70'); }
+                }
+            });
+
+            // モバイルナビの更新
+            mobileNavLinks.forEach(link => {
+                const icon = link.querySelector('svg');
+                if (link.dataset.id === id) {
+                    // Active style
+                    link.className = 'mobile-nav-link w-full flex items-center gap-3 px-4 py-4 rounded-xl text-base font-bold transition-colors bg-blue-500/30 text-white border border-blue-500/40';
+                    if (icon) { icon.classList.remove('opacity-70'); icon.classList.add('text-blue-400'); }
+                } else {
+                    // Inactive style
+                    link.className = 'mobile-nav-link w-full flex items-center gap-3 px-4 py-4 rounded-xl text-base font-bold transition-colors text-white/70 hover:text-white hover:bg-white/10 border border-transparent';
+                    if (icon) { icon.classList.remove('text-blue-400'); icon.classList.add('opacity-70'); }
+                }
+            });
+        }
+
+        // スクロール位置の監視（Intersection Observer の代わり）
+        window.addEventListener('scroll', () => {
+            const sections = ['overview', 'findings', 'conclusion'];
+            const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element) {
+                    const top = element.offsetTop;
+                    const bottom = top + element.offsetHeight;
+                    if (scrollPosition >= top && scrollPosition < bottom) {
+                        updateActiveNav(section);
+                    }
+                }
+            }
+        });
+
+        // 各リンクへのクリックイベント登録
+        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                scrollToSection(link.dataset.id);
+            });
+        });
+
+    </script>
+</body>
+</html>
